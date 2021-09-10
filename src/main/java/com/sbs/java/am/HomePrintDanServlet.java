@@ -20,11 +20,14 @@ public class HomePrintDanServlet extends HttpServlet {
 		if(inputedDan == null) {
 			inputedDan = "1";
 		}
+		
+		String inputedlimit = request.getParameter("limit");
 		// html 형태이기에 \n은 인식하지 못하므로 <br>로 처리해줘야 한다.
 		// ctrl + e 자동완성기능
 		int dan =  Integer.parseInt(inputedDan);
+		int limit =  Integer.parseInt(inputedlimit);
 		response.getWriter().append(String.format("%d단<br>", dan));
-		for(int i = 1; i<=9; i++) {
+		for(int i = 1; i<=limit; i++) {
 			response.getWriter().append(String.format("%d * %d = %d<br>", dan, i, dan*i));
 		}
 	}
