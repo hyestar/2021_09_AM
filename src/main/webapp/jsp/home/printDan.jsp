@@ -1,21 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
-int dan = 8;
+int dan = Integer.parseInt(request.getParameter("dan"));
+int limit = Integer.parseInt(request.getParameter("limit"));
+String color = request.getParameter("color");
 %>
-<!--ÀÚ¹Ù¹®¹ý »ç¿ëÇÏ°í ½ÍÀ»¶§´Â <% %>·ÎÇØ¼­ »ç¿ëÇÏ¸é µÊ!! -->
+<!--ìžë°”ë¬¸ë²• ì‚¬ìš©í•˜ê³  ì‹¶ì„ë•ŒëŠ” <% %>ë¡œí•´ì„œ ì‚¬ìš©í•˜ë©´ ë¨!! -->
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>±¸±¸´Ü Ãâ·Â</title>
+<meta charset="UTF-8">
+<title>êµ¬êµ¬ë‹¨ ì¶œë ¥</title>
 </head>
 <body>
-	<div>== <% out.print(dan); %>´Ü ==</div>
+	<div style = "color:<%=color %>;">== <%=dan %>ë‹¨ ==</div>
 	
-	<!--ÀÚ¹Ù¹®¹ý°ú html¹®¹ýÀ» °°ÀÌ »ç¿ë °¡´ÉÇÔ-->
-	<%for(int i =1; i<=9; i++){ %>
-	<div><%=dan %> * <%=i %> = <%=dan*i %></div>
+	<!--ìžë°”ë¬¸ë²•ê³¼ htmlë¬¸ë²•ì„ ê°™ì´ ì‚¬ìš© ê°€ëŠ¥í•¨-->
+	<%for(int i =1; i<=limit; i++){ %>
+	<div style = "color:<%=color %>;"><%=dan %> * <%=i %> = <%=dan*i %></div>
 	<%} %>
 
 </body>
