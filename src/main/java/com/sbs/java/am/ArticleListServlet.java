@@ -40,10 +40,18 @@ public class ArticleListServlet extends HttpServlet {
 					conn = DriverManager.getConnection(url, user, password);
 					DBUtil dbUtil = new DBUtil(request, response);
 
-					String sql = "SELECT * FROM article";
+					String sql = "SELECT * FROM article ORDER BY id DESC";
 					List<Map<String, Object>> articleRows = dbUtil.selectRows(conn, sql);
 
-					response.getWriter().append(articleRows.toString());
+					for (int i = 0; i < articleRows.size(); i++) {
+						Map<String, Object> articleRow = articleRows.get(i);
+
+						int id = (int)articleRow.get("id");
+						String title = (String)articleRow.get("title");
+
+						response.getWriter().append(String.format("<div>%d, %s</div>", id, title));
+
+					}
 
 				} catch (SQLException e) {
 					e.printStackTrace();
