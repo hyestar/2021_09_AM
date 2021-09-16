@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.am.util.DBUtil;
+import com.sbs.java.am.util.SecSql;
 
 @WebServlet("/article/list")
 public class ArticleListServlet extends HttpServlet {
@@ -36,13 +37,15 @@ public class ArticleListServlet extends HttpServlet {
 				}
 
 				// DB 연결
-				Connection conn = null;
+				Connection con = null;
 
 				try {
-					conn = DriverManager.getConnection(url, user, password);
+					con = DriverManager.getConnection(url, user, password);
 
-					String sql = "SELECT * FROM article ORDER BY id DESC";
-					List<Map<String, Object>> articleRows = DBUtil.selectRows(conn, sql);
+					SecSql sql = SecSql.from("SELECT *");
+					sql.append("FROM article");
+					sql.append("ORDER BY id DESC");
+					List<Map<String, Object>> articleRows = DBUtil.selectRows(con, sql);
 
 					response.getWriter().append(articleRows.toString());
 
@@ -52,9 +55,9 @@ public class ArticleListServlet extends HttpServlet {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				} finally {
-					if (conn != null) {
+					if (con != null) {
 						try {
-							conn.close();
+							con.close();
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}

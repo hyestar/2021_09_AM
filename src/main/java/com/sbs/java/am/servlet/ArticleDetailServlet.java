@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.am.util.DBUtil;
+import com.sbs.java.am.util.SecSql;
 
 @WebServlet("/article/detail")
 public class ArticleDetailServlet extends HttpServlet {
@@ -35,16 +36,18 @@ public class ArticleDetailServlet extends HttpServlet {
 				}
 
 				// DB 연결
-				Connection conn = null;
+				Connection con = null;
 
 				try {
-					conn = DriverManager.getConnection(url, user, password);
+					con = DriverManager.getConnection(url, user, password);
 
 					int id = Integer.parseInt(request.getParameter("id"));
 					
 					// String.format을 사용하면 C언어의 printf처럼 사용가능
-					String sql = String.format("SELECT * FROM article WHERE id = %d", id);
-					Map<String, Object> articleRow = DBUtil.selectRow(conn, sql);
+					SecSql sql = SecSql.from("SELECT * ");
+					sql.append("FROM article");
+					sql.append("WHERE id = ?", id);
+					Map<String, Object> articleRow = DBUtil.selectRow(con, sql);
 
 					response.getWriter().append(articleRow.toString());
 
@@ -54,9 +57,9 @@ public class ArticleDetailServlet extends HttpServlet {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				} finally {
-					if (conn != null) {
+					if (con != null) {
 						try {
-							conn.close();
+							con.close();
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}
