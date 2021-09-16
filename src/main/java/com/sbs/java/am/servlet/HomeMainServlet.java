@@ -1,4 +1,4 @@
-package com.sbs.java.am;
+package com.sbs.java.am.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,7 +12,7 @@ public class HomeMainServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("HelloWorld!");
+		request.getRequestDispatcher("/jsp/home/main.jsp").forward(request, response);
 	}
 
 }
