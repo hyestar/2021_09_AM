@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,15 +44,10 @@ public class ArticleInsertServlet extends HttpServlet {
 					String body = request.getParameter("body");
 					
 					SecSql sql = SecSql.from("INSERT INTO article");
-					sql.append("SET title = ?, body = ?", title, body);
-
-					Map<String, Object> articleRow = DBUtil.selectRow(con, sql);
-
-					response.getWriter().append(articleRow.toString());
-
-					request.setAttribute("articleRow", articleRow);
-					request.getRequestDispatcher("/jsp/article/insert.jsp").forward(request, response);
-					response.getWriter().append("<script> alert('1번 글이 생성되었습니다.'); location.replace('list');</script>");
+					sql.append("SET regDate = NOW(), title = ?, `body` = ?", title, body);
+					//request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);
+					int id = DBUtil.insert(con, sql);
+					response.getWriter().append(String.format("<script> alert('%d번 글이 생성되었습니다.'); location.replace('list');</script>",id));
 
 				} catch (SQLException e) {
 					e.printStackTrace();
