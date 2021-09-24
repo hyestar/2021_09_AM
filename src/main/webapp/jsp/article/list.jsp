@@ -67,6 +67,9 @@ int totalpage = (int) request.getAttribute("totalpage");
 
 	</ul> --%>
 	<h1>게시물 리스트</h1>
+	
+	<div><a href="insert">게시물 작성</a></div>
+	
 	<table border = "1">
 		<thead>
 			<tr>
