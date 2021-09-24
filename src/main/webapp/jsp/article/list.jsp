@@ -68,7 +68,7 @@ int totalpage = (int) request.getAttribute("totalpage");
 	</ul> --%>
 	<h1>게시물 리스트</h1>
 	
-	<div><a href="insert">게시물 작성</a></div>
+	<div><a href="write">게시물 작성</a></div>
 	
 	<table border = "1">
 		<thead>
@@ -77,6 +77,7 @@ int totalpage = (int) request.getAttribute("totalpage");
 				<th>날짜</th>
 				<th>제목</th>
 				<th>삭제</th>
+				<th>수정</th>
 			</tr>
 				
 		</thead>
@@ -90,7 +91,10 @@ int totalpage = (int) request.getAttribute("totalpage");
 				<td><%=articleRow.get("regDate") %></td>
 				<td><a href="detail?id=<%=articleRow.get("id")%>"><%=articleRow.get("title")%></a></td>
 				<td>
-				<a href="doDelete?id=<%=articleRow.get("id") %>">삭제하기</a>
+				<a href="doDelete?id=<%=articleRow.get("id") %>">삭제</a>
+				</td>
+				<td>
+				<a href="modify?id=<%=articleRow.get("id") %>">수정</a>
 				</td>
 			<%} %>
 		</tbody>
