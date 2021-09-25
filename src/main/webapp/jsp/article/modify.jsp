@@ -14,10 +14,19 @@ Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("art
 </head>
 <body>
 	<h1>게시물 수정</h1>
-	<div>번호 : <%=(int)articleRow.get("id") %></div>
-	<div>날짜 : <%=(LocalDateTime)articleRow.get("regDate") %></div>
-	<div>제목 : </div>
-	<div>내용 : </div>
-	<div><a href="list">리스트로 돌아가기</a></div>
+	<form action="domodify" method="POST">
+			<!-- 		<input type="hidden" name="id" -->
+			<%-- 			value="<%=Integer.parseInt(request.getParameter("id"))%>" /> --%>
+		<input type="hidden" name="id" value="${param.id }" />
+		<div>번호 : <%=(int)articleRow.get("id") %></div>
+		<div>날짜 : <%=(LocalDateTime)articleRow.get("regDate") %></div>
+		<div>제목 : <input autocomplete="off" type="text" name = "title" placeholder="제목을 입력해주세요" 
+			value = "<%=(String) articleRow.get("title") %>"/></div>
+		<div>내용 : <textarea autocomplete="off" name="body" placeholder="내용을 입력해주세요"><%=(String) articleRow.get("body") %></textarea></div>
+		<div>
+			<button type="submit">수정</button>
+			<a href="list">리스트로 돌아가기</a>
+		</div>
+	</form>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <body>
 	<h1>게시물 작성</h1>
 	<!-- action은 편지지라고 생각했을때 받는 사람의 주소-->
-	<form action="dowrite" method="post">
+	<form action="dowrite" method="POST">
 		<div>제목 : <input autocomplete = "off" placeholder = "제목을 입력해주세요" name="title" type="text" /></div>
 		<div>내용 : <textarea cols="30" rows="10" placeholder = "내용을 입력해주세요" name = "body"/></textarea></div>
 		<div>
