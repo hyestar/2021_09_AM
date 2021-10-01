@@ -13,12 +13,11 @@ public class MemberJoinServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getRequestDispatcher("/jsp/member/join.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsp/member/join.jsp").forward(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
