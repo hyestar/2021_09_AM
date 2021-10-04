@@ -43,7 +43,7 @@ public class MemberDoJoinServlet extends HttpServlet {
 			String name = request.getParameter("name");
 			
 			SecSql sql = SecSql.from("INSERT INTO member");
-			sql.append("SET regDate = NOW()");
+			sql.append(" SET regDate = NOW()");
 			sql.append(", loginId = ?", loginId);
 			sql.append(", loginPw = ?", loginPw);
 			sql.append(", `name` = ?", name);

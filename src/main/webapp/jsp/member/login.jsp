@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>로그인</title>
 </head>
 <body>
 	<h1 onclick = "alert('hi'); return false;">회원가입</h1>
@@ -48,7 +48,7 @@
 				form.name.focus();
 				return;
 			}
-			form.submit();
+			form.sumbit();
 			JoinForm__submitDone = true;
 		}
 	</script>
