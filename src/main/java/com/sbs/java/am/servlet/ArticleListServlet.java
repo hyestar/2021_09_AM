@@ -21,6 +21,7 @@ import com.sbs.java.am.util.SecSql;
 public class ArticleListServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
 		// 커넥터 드라이버 활성화

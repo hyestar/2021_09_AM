@@ -25,6 +25,7 @@ public class ArticledoModifyServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 
+
 		// 커넥터 드라이버 활성화
 		String driverName = Config.getDBDriverClassName();
 
@@ -73,4 +74,4 @@ public class ArticledoModifyServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-} 
+}

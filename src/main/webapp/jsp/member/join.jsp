@@ -14,6 +14,7 @@
 		var JoinFrom__submitDone = false;
 		
 		function JoinForm__submit(form){
+			// 전송 버튼 클릭으로 같은 정보가 두번 전송되지 않게 하기 위해서
 			if(JoinForm__submitDone){
 				alert('처리중 입니다.');
 				return;
@@ -54,7 +55,7 @@
 	</script>
 	
 	<!-- onsubmit이 return false인 경우 submit(제출)안함 -->
-	<form action="doJoin" method = "POST" onsubmit = "JoinForm__submit(this); return false;"></form>
+	<form action="doJoin" method = "POST" onsubmit = "JoinForm__submit(this); return false;">
 	<div>
 	로그인 아이디 :  <input autocomplete = "off" placeholder = "로그인 아이디를 입력해주세요" name="loginId" type="text" />
 	</div>
@@ -73,5 +74,6 @@
 		<button type = "submit">가입</button>
 		<button type = "button"><a href="../home/main">취소</a></button>
 	</div>
+	</form>
 </body>
 </html>
