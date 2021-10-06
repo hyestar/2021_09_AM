@@ -57,7 +57,7 @@ public class ArticledoModifyServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (SQLErrorException e) {
-			e.getOrigin().printStackTrace();
+			e.getOrigin().printStackTrace(); 
 		} finally {
 			if (con != null) {
 				try {
