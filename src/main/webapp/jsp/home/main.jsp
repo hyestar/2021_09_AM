@@ -14,16 +14,12 @@ int loginedMemberId = (int) request.getAttribute("loginedMemberId");
 
 	<h1>메인페이지</h1>
 
-	<%
-	if (isLogined) {
-	%>
+	<% if (isLogined) {%>
 	<div>
 	<%=loginedMemberId %> 번 회원님 환영합니다.
 		<a href="../member/doLogout">로그아웃</a>
 	</div>
-	<%
-	}
-	%>
+	<% }%>
 
 	<%
 	if (!isLogined) {
