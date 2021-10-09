@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sbs.java.am.Config;
 import com.sbs.java.am.exception.SQLErrorException;
@@ -23,6 +24,14 @@ public class ArticleInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		
+		HttpSession session = request.getSession();
+
+		if (session.getAttribute("loginedMemberId") == null) {
+			response.getWriter().append(
+					String.format("<script> alert('로그인 후 이용해주세요.'); location.replace('../member/login'); </script>"));
+			return;
+		}
 		
 		// 커넥터 드라이버 활성화
 				String driverName = Config.getDBDriverClassName();
@@ -44,9 +53,12 @@ public class ArticleInsertServlet extends HttpServlet {
 					String title = request.getParameter("title");
 					String body = request.getParameter("body");
 					
+					int loginedMemberId = (int) session.getAttribute("loginedMemberId");
+					
 					SecSql sql = SecSql.from("INSERT INTO article");
 					sql.append("SET regDate = NOW(), title = ?, `body` = ?", title, body);
 					//request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);
+					sql.append(", memberId = ?", loginedMemberId);
 					int id = DBUtil.insert(con, sql);
 					response.getWriter().append(String.format("<script> alert('%d번 글이 생성되었습니다.'); location.replace('list');</script>",id));
 
