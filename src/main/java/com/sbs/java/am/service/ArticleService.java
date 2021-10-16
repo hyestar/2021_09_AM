@@ -3,14 +3,17 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
+import com.sbs.java.am.dao.ArticleDao;
 import com.sbs.java.am.util.DBUtil;
 import com.sbs.java.am.util.SecSql;
 
 public class ArticleService {
 	private Connection con;
+	private ArticleDao articleDao;
 
 	public ArticleService(Connection con) {
 		this.con = con;
+		this.articleDao = new ArticleDao(con);
 	}
 
 	public int getItemsInAPage() {
@@ -20,9 +23,7 @@ public class ArticleService {
 	public int getForPrintListTotalPage() {
 		int itemsInAPage = getItemsInAPage();
 
-		SecSql sql = SecSql.from("SELECT COUNT(*) AS cnt");
-		sql.append("FROM article;");
-		int totalCount = DBUtil.selectRowIntValue(con, sql);
+		int totalCount = articleDao.getTotalCount();
 		int totalpage = (int) Math.ceil((double) totalCount / itemsInAPage);
 
 		return totalpage;
@@ -32,12 +33,7 @@ public class ArticleService {
 		int itemsInAPage = getItemsInAPage();
 		int limitFrom = (page - 1) * itemsInAPage;
 
-		SecSql sql = SecSql.from("SELECT *");
-		sql.append("FROM article");
-		sql.append("ORDER BY id DESC");
-		sql.append("LIMIT ?, ?", limitFrom, itemsInAPage);
-
-		List<Map<String, Object>> articleRows = DBUtil.selectRows(con, sql);
+		List<Map<String, Object>> articleRows = articleDao.getArticleRows(limitFrom, itemsInAPage);
 
 		return articleRows;
 	}
