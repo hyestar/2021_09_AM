@@ -3,12 +3,12 @@ package com.sbs.java.am.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sbs.java.am.dto.Article;
 import com.sbs.java.am.service.ArticleService;
 
 public class ArticleController {
@@ -32,9 +32,9 @@ public class ArticleController {
 		}
 
 		int totalpage = articleService.getForPrintListTotalPage();
-		List<Map<String, Object>> articleRows = articleService.getForPrintArticleRows(page);
+		List<Article> articles = articleService.getForPrintArticles(page);
 
-		request.setAttribute("articleRows", articleRows);
+		request.setAttribute("articles", articles);
 		request.setAttribute("page", page);
 		request.setAttribute("totalpage", totalpage);
 		request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);

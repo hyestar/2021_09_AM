@@ -1,9 +1,11 @@
 package com.sbs.java.am.dao;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.sbs.java.am.dto.Article;
 import com.sbs.java.am.util.DBUtil;
 import com.sbs.java.am.util.SecSql;
 
@@ -22,7 +24,7 @@ public class ArticleDao {
 		return totalCount;
 	}
 
-	public List<Map<String, Object>> getArticleRows(int limitFrom, int limitCount) {
+	public List<Article> getArticles(int limitFrom, int limitCount) {
 		SecSql sql = SecSql.from("SELECT *");
 		sql.append("FROM article");
 		sql.append("ORDER BY id DESC");
@@ -30,6 +32,12 @@ public class ArticleDao {
 
 		List<Map<String, Object>> articleRows = DBUtil.selectRows(con, sql);
 
-		return articleRows;
+		List<Article> articles = new ArrayList<>();
+
+		for (Map<String, Object> articleRow : articleRows) {
+			articles.add(new Article(articleRow));
+		}
+
+		return articles;
 	}
 }
