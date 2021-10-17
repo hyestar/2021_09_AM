@@ -27,7 +27,7 @@ public class ArticleService {
 		return totalpage;
 	}
 
-	public List<Article> getForPrintArticleRows(int page) {
+	public List<Article> getForPrintArticles(int page) {
 		int itemsInAPage = getItemsInAPage();
 		int limitFrom = (page - 1) * itemsInAPage;
 

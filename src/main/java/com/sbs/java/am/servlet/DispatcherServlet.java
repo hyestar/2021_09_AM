@@ -82,6 +82,15 @@ public class DispatcherServlet extends HttpServlet {
 				if (actionMethodName.equals("list")) {
 					controller.actionList();
 				}
+//				else if(actionMethodName.equals("detail"))
+//				controller.showDetail();	// 성공했다면 해당 서블릿 지워보기
+//		else if (controllerName.equals("member")) {
+//			MemberController contoller = new MemberController(request, response, con);
+//			
+//			if(actionMethodName.equals("join")) {
+//				contoller.actionJoin();
+//			}
+//		}
 			}
 
 		} catch (SQLException e) {
